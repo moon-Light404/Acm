@@ -304,7 +304,6 @@ int main()
     cout << f[m];
     return 0;
 }
-
 ```
 #### 标准朴素写法
 ```c++
@@ -338,8 +337,6 @@ int main(){
 
     return 0;
 }
-
-
 ```
 
 

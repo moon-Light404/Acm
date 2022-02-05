@@ -71,3 +71,37 @@ ABDCDCBABC
 - 循环长度
 - 左端点
 
+**状态转移方程**
+
+1、`a[r] = a[l]` ： `f[l][r] = f[l+1][r-1] + 2`
+
+2、`f[l][r] = max(f[i][r-1], f[[i][r], f[i+1][r])` 比较相邻区段的字符串中包含的回文字符串(不需要连续)
+
+```c++
+#include<cstring>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+const int  N = 1100;
+char a[N];
+int f[N][N]; // f[i][j]表示i到j之间的最大回文子串
+int main() {
+	cin >> a + 1;
+	int maxlen = strlen(a + 1);
+	for (int i = 1; i <= maxlen; i++)
+		f[i][i] = 1; // 初始化
+	for (int len = 1; len < maxlen; len++) { // 长度
+		for (int i = 1; i + len <= maxlen; i++ ) { // 起点
+			int r = i + len ; // 右端点
+			if (a[r] == a[i])
+				f[i][r] = f[i + 1][r - 1] + 2;
+
+			f[i][r] = max(f[i][r], f[i][r - 1]);
+			f[i][r] = max(f[i][r], f[i + 1][r]);
+		}
+	}
+	cout << maxlen - f[1][maxlen]  << endl;
+	return 0;
+}
+```
+

@@ -304,7 +304,7 @@ top()  //返回栈顶元素
 ```c++
 deque<int> a_deque; //size =0 的deque
 deque<int> deques(10);//创建一个size = 10 
-deque<std:string> words{"1","2","3"};//初始化
+deque<stdstring> words{"1","2","3"};//初始化
 deque<int> deque_2 {deques};//使用另一个deque初始化
 //deque没有 capacity 属性，deque的capacity总是和size相等
 ```
@@ -515,5 +515,103 @@ int main() {
 
 
 
+### STL中一些函数的用法
+
+#### unique
+
+unique(iterator t1, t2)函数删除的是序列中所以**相邻的重复元素**，并不是真正的删除，而是指的重复元素的位置被不重复的元素占领
+
+如果我们要去除数组中所有重复的元素，一般需要对数组进行排序。
 
 
+
+
+
+#### bitset
+
+c++ 的bitset头文件中，类似于数组的结构，每个元素只能是0或1，每个元素只占1bit空间
+
+```c++
+bitset<4> bitset1;　　//无参构造，长度为４，默认每一位为０
+
+    bitset<8> bitset2(12);　　//长度为８，二进制保存，前面用０补充
+
+    string s = "100101";
+    bitset<10> bitset3(s);　　//长度为10，前面用０补充
+    
+    char s2[] = "10101";
+    bitset<13> bitset4(s2);　　//长度为13，前面用０补充
+
+    cout << bitset1 << endl;　　//0000
+    cout << bitset2 << endl;　　//00001100
+    cout << bitset3 << endl;　　//0000100101
+    cout << bitset4 << endl;　　//0000000010101
+```
+
+>  **操作符**
+
+```c++
+bitset<4> foo (string("1001"));
+    bitset<4> bar (string("0011"));
+
+    cout << (foo^=bar) << endl;       // 1010 (foo对bar按位异或后赋值给foo)
+    cout << (foo&=bar) << endl;       // 0010 (按位与后赋值给foo)
+    cout << (foo|=bar) << endl;       // 0011 (按位或后赋值给foo)
+
+    cout << (foo<<=2) << endl;        // 1100 (左移２位，低位补０，有自身赋值)
+    cout << (foo>>=1) << endl;        // 0110 (右移１位，高位补０，有自身赋值)
+
+    cout << (~bar) << endl;           // 1100 (按位取反)
+    cout << (bar<<1) << endl;         // 0110 (左移，不赋值)
+    cout << (bar>>1) << endl;         // 0001 (右移，不赋值)
+
+    cout << (foo==bar) << endl;       // false (0110==0011为false)
+    cout << (foo!=bar) << endl;       // true  (0110!=0011为true)
+
+    cout << (foo&bar) << endl;        // 0010 (按位与，不赋值)
+    cout << (foo|bar) << endl;        // 0111 (按位或，不赋值)
+    cout << (foo^bar) << endl;        // 0101 (按位异或，不赋值)
+```
+
+此外，可以通过 [ ] 访问元素(类似数组)，注意最低位下标为０，如下：
+
+```c++
+  bitset<4> foo ("1011");
+    
+    cout << foo[0] << endl;　　//1
+    cout << foo[1] << endl;　　//1
+    cout << foo[2] << endl;　　//0
+// 也可以对某一位进行赋值
+```
+
+
+
+**可用函数**
+
+- `count()`：求1的位数
+- `test()`：查某个下标处的元素是0 (false)还是 1(true)
+- `any()`：检查bitset中是否有1
+- `none()`：检查bitset中是否没有1
+- `all()`：：检查bitset中是否全部为1
+
+
+
+
+
+#### `lower_bound` 和 `upper_bound`
+
+1、左闭右开区间里进行二分查找
+
+`lower_bound(begin(), end(), num)`：查找第一个大于或等于num的数字，返回该数字的地址，不存在则返回end()，`返回地址 - begin() = 数字在数组中的下标`
+
+
+
+`upper_bound(begin(), end(), num)`：查找第一个大于num的数字，返回该数字的地址，不存在则返回end，
+
+
+
+2、在从大到小的排序数组中，重载
+
+`lower_bound( begin,end,num,greater< type>())`：查找第一个小于或等于 num 的数字
+
+`upper_bound( begin,end,num,greater< type>())`：查找第一个小于 num 的数字

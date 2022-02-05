@@ -50,10 +50,9 @@ int main() {
 	memset(g, 0x3f, sizeof g);
 	for (int i = 1; i < 2021; i++)
 		for (int j = i + 1; j <= 2021; j++) {
-			if (i != j) {
-				if (i != j && f(i, j))
-					g[i][j] = g[j][i] = lcm(i, j);
-			}
+			if (f(i, j))
+				g[i][j] = g[j][i] = lcm(i, j);
+
 		}
 	cout << dijkstra();
 	return 0;

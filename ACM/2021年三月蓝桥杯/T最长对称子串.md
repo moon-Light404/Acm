@@ -59,3 +59,36 @@ int main()
 }
 ```
 
+
+
+> 动态规划解法
+
+```c++
+#include<iostream>
+#include<cstring>
+using namespace std;
+const int N = 1010;
+bool dp[N][N]; // dp[i][j]表示的是(i,j)字符串是否是回文串
+string s;
+int main() {
+    getline(cin, s);
+    int n = s.length();
+    int maxLen = 1;
+    for(int i = 0; i < n;i++)   dp[i][i] = true; // 单个字符也是回文串
+    for(int L = 2; L <= n; L++) { // 遍历长度
+        for(int i = 0 ;i < n;i++) { // 遍历起点
+            int j = i + L - 1; // 终点
+            if(j >= n)  break;
+            if(s[i] != s[j]) dp[i][j] = false;
+            else {
+                if(j - i <= 2)  dp[i][j] = true;
+                else    dp[i][j] = dp[i+1][j-1];
+            }
+            if(dp[i][j] && j - i + 1 > maxLen)  maxLen = j - i + 1;
+        }
+    }
+    cout <<maxLen << endl;
+    return 0;
+}
+```
+
