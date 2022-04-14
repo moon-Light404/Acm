@@ -17,6 +17,7 @@
 //}
 
 
+
 // 2481215
 //#include <iostream>
 //using namespace std;
@@ -37,56 +38,6 @@
 //}
 
 // 761
-//#include <iostream>
-//using namespace std;
-//const int N = 101;
-//int a[N][N];
-//int main() {
-//	int cnt = 1;
-//	int i = 1, j = 1;
-//	a[i][j] = 1;
-//	while (cnt < 1000) {
-//		if (i == 1)
-//			j++;
-//		a[i][j] = ++cnt;
-//
-//		while (j > 1)
-//			a[++i][--j] = ++cnt;
-//
-//		if (j == 1)
-//			i++;
-//		a[i][j] = ++cnt;
-//
-//		while (i > 1)
-//			a[--i][++j] = ++cnt;
-//
-//	}
-//	cout << a[20][20];
-//	return 0;
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -143,38 +94,6 @@
 //	cout << ss.size() << endl;
 //	return 0;
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -292,6 +211,216 @@
 //		sum += (i - pre[i]) * (nxt[i] - i);
 //	}
 //	cout << sum;
+//	return 0;
+//}
+
+
+
+
+
+// 合并检测
+//#include<iostream>
+//using namespace std;
+
+//int main() {
+//	int ans = 0x3f3f3f3f, tempx = 1;
+//	int x = 10000;
+//	for(int i = 1; i <= x; i++) {
+//		int t = x / i;
+//		if(x % i != 0)	t += 1;
+//		t = t + 0.01 * x * i;
+//		if(ans > t)	ans = t, tempx = i;		
+//	}
+//	cout << tempx;
+//	return 0;
+//} 
+
+// 分配口罩
+//#include<iostream>
+//#include<cmath>
+//#include<algorithm>
+//using namespace std;
+//int a[15] = {9090400, 8499400, 5926800,8547000, 4958200, 4422600, 5751200,
+//4175600, 6309600, 5865200, 6604400, 4635000, 10663400, 8087200, 4554000};
+//int ans = 0x3f3f3f3f;
+
+//void dfs(int u, int s1, int s2) {
+//	if(u == 15) {
+//		ans = min(ans, abs(s1 -s2));
+//		return;
+//	}
+//	dfs(u + 1, s1 + a[u], s2);
+//	dfs(u + 1, s1, s2 + a[u]);
+//}
+//int main() {
+//	dfs(0, 0, 0);
+//	cout << ans;
+//	return 0;
+//} 
+
+// 完美平方数 
+
+
+
+
+// 解码 
+//#include<iostream>
+//#include<cstring>
+//using namespace std;
+//string s;
+//int main() {
+//	cin >> s;
+//	string ans;
+//	for(int i = 0; i < s.size(); i++) {
+//		if(isdigit(s[i])) {
+//			int n = s[i] - '0' - 1;
+//			while(n--)	ans += s[i-1];
+//		}
+//		else	ans += s[i];
+//	}
+//	cout << ans << endl;
+//	return 0;
+//}
+
+// 走方格 
+//#include<iostream>
+//#include<cstdio>
+//using namespace std;
+//const int N = 31;
+//int f[N][N];
+//int n, m;
+//int main() {
+//	cin >> n >> m;
+//	if(n % 2 == 0 && m % 2 == 0) {
+//		puts("0");
+//	}else {
+//		for(int i = 1; i <= n; i++)	f[n][1] = 1;
+//		for(int j = 1; j <= m; j++)	f[1][j] = 1;
+//		for(int i = 2; i <= n; i++)
+//			for(int j = 2; j <= m; j++) {
+//				if((i & 1) || (j & 1))
+//					f[i][j] += (f[i - 1][j] + f[i][j-1]);
+//			}
+//		cout << f[n][m] << endl;
+//	}
+//	return 0;
+//}
+
+//include<iostream>
+//#include<algorithm>
+//#include<cmath>
+//using namespace std;
+//const int N =31;
+//int n;
+//int x[N];
+//int y[N];
+//int r[N];
+//bool vis[N];
+//int ans;
+
+//void dfs(int step,int sum){
+//    if(step==n){
+//        ans=max(ans,sum);
+//        return;
+//    }
+//    for(int i=1;i<=n;i++){
+//        if(!vis[i]){
+//            int tmp=r[i];
+//            for(int j=1;j<=n;j++){
+//               if(vis[j] && j!=i && ((pow(x[i]-x[j],2)+pow(y[i]-y[j],2))<pow(r[i]+r[j],2)) )
+//                    r[i]=0;
+//            }
+//            vis[i]=true;
+//            dfs(step+1,sum+r[i]*r[i]);
+//            vis[i]=false;
+//            r[i]=tmp;
+//        }
+//    }
+
+//}
+//int main(){
+//    cin>>n;
+//    for(int i=1;i<=n;i++)
+//        cin>>x[i]>>y[i]>>r[i];
+//    dfs(0,0);
+//    cout<<ans<<endl;
+//}
+
+// 数字三角形
+//#include<iostream>
+//#include<cmath>
+//#include<cstdio>
+//using namespace std;
+//const int N = 110;
+//int g[N][N];
+//int n;
+//struct Node {
+//	int sum = 0; // 从最顶点走到当前点向左、右各走了几步 
+//	int l = 0;
+//	int r = 0;
+//};
+//Node f[N][N];
+//int main() {
+//	cin >> n;
+//	for(int i = 1; i <= n; i++)
+//		for(int j = 1; j <= i; j++) {
+//			int s;
+//			scanf("%d", &s);
+//			f[i][j].sum = s;
+//		}
+//	for(int i = 2; i <= n; i++)
+//		for(int j = 1; j <= i; j++) {
+//			if(f[i-1][j-1].sum > f[i-1][j].sum) {
+//				f[i][j].sum += f[i-1][j-1].sum;
+//				f[i][j].l  = f[i-1][j-1].l;
+//				f[i][j].r = f[i-1][j-1].r + 1;
+//			}else {
+//				f[i][j].sum += f[i-1][j].sum;
+//				f[i][j].r = f[i-1][j].r;
+//				f[i][j].l = f[i-1][j].l + 1;
+//			}
+//		}
+//	int ans = 0;
+//	for(int i = 1; i <= n;i++) {
+//		if(abs(f[n][i].l - f[n][i].r) <= 1)
+//			ans = max(ans, f[n][i].sum);
+//	}
+//	cout << ans << endl;
+//	return 0;
+//} 
+
+//#include<iostream>
+//using namespace std;
+//typedef long long LL;
+//LL n;
+//const int N = 3020;
+//LL f[N][N];
+//bool flag;
+
+//int main() {
+//	cin >> n;
+//	LL cnt = 1; // 计数 
+//	f[1][1] = 1;
+//	if(n == 1) {
+//		cout << "1" << endl;
+//		return 0;
+//	}
+//	for(int i = 2; i <= N; i++) {
+//		if(!flag)
+//			for(int j = 1; j <= i; j++) {
+//				if(j == 1 || j == i)	f[i][j] = 1;
+//				else	f[i][j] = f[i-1][j-1] + f[i-1][j];
+//				cout << f[i][j] << " ";
+//				cnt++;
+//				if(f[i][j] == n) {
+//					flag = true;
+//					break;
+//				}
+//			}	
+//		cout << endl;
+//	}
+//		
+//	cout << cnt << endl;
 //	return 0;
 //}
 

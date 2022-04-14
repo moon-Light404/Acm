@@ -4,7 +4,7 @@ RSA是一种经典的加密算法。它的基本加密过程如下。
 
   首先生成两个大质数p,q, 令n = p*q,设d与(p-1)*(q-1)互质，则可以找到e,使得d*e除以(p-1)*(q-1)的余数为1
 
-  n,d,e组成了私钥，n,d构成了公钥。
+  n,e组成了私钥，n,d构成了公钥。
 
   当使用公钥加密一个整数X时(X<=n-1)，计算$C = X^d mod n$，则C是加密后的密文。
 
@@ -14,7 +14,7 @@ RSA是一种经典的加密算法。它的基本加密过程如下。
 
   若加密数字24,得$24^3$ % 55 = 19。
 
-  解密数字19，得$19^27$ % 55 = 24。
+  解密数字19，得$19^{27}$ % 55 = 24。
 
   现在你知道公钥中n = 1001733993063167141,d = 212353,同时，你截获了别人发送的密文C = 20190324,请问，原文是多少？
 
@@ -40,7 +40,7 @@ void extgcd(ll a, ll b, ll& x, ll& y) {
         x = 1; y = 0;
         return;
     }
-    extgcd(a, b, x, y);
+    extgcd(b, x, y);
     ll t = y;
     y = x - a / b * y;
     x = t;
@@ -50,6 +50,7 @@ void extgcd(ll a, ll b, ll& x, ll& y) {
 // 快速幂：因为快速幂计算过程中 ans * a 可能会爆long long，我们将其转化为模加运算
 // 快速乘
 // 11得二进制数为1011, a * 11 = a * 2(0) + a * 2(1) + a * 2(3) 
+// 求a*b % mod 快速乘
 ll fast_pro(ll a, ll b, ll mod) {
     ll ans = 0;
     while(b) {
@@ -77,7 +78,17 @@ ll get_pow(ll a, ll b, ll mod) {
     return ans;
 }
 
-
+int main() {
+//	BF(n);
+	ll m = (ll) (1123984201 - 1) * (891234941 - 1);
+	ll a = 212353, b = m, x, y;
+	extgcd(a, b, x, y);
+	ll e = (x % m + m) % m; // f
+	cout << e << endl;  //823816093931522017
+	ll res = get_pow(20190324, e, n);
+	cout << res << endl;
+	return 0;
+}
 
 ```
 

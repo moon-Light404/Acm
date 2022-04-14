@@ -53,7 +53,7 @@ int query(char *s) {
 	for (int i = 0; s[i]; i++) {
 		int u = s[i] - 'a';
 		if (!children[p][u])
-			return 0; // 中间值都b匹配，就不用往下查找了
+			return 0; // 中间值都不匹配，就不用往下查找了
 		p = children[p][u];
 	}
 	return cnt[p];

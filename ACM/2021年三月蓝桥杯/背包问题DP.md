@@ -107,7 +107,7 @@ int main()
 }
 ```
 
-==优化分析==
+==优化分析== 
 看上面的输出数据, 我们会发现其实二维表里有很多重复的. 这是因为, 从递归式的特点来看, 我们只是基于第i-1层对第i层做了更新, 而第i-1层该是什么样还是什么样.
 
 换言之, 我们只需要知道最后一层的情况, 而不需要存储之前的结果.
@@ -391,4 +391,88 @@ int main() {
     return 0;
 }
 ```
+
+
+
+
+
+### 多重背包问题III(单调队列优化)
+
+
+
+
+
+### <a href="https://www.acwing.com/activity/content/code/content/2888951/">混合背包问题</a>
+
+
+
+![image-20220318153009061](https://cdn.jsdelivr.net/gh/moon-Light404/my-picGo@master/img/image-20220318153009061.png)
+
+【思路】
+使用二进制优化将其转化为01背包问题，
+完全背包问题中虽然物品无限，但是最多可以装 $V/b$件，因为不能超过其背包的最大体积。
+
+```c++
+#include<iostream>
+using namespace std;
+const int N = 10010;
+int f[N], v[N], w[N], s[N];
+int n, m;
+
+int main() {
+    cin >> n >> m;
+    int cnt = 0;
+    for(int i = 1; i <= n; i++) {
+        int a, b, c;
+        scanf("%d%d%d", &a, &b, &c);
+        if(c == -1)     c = 1;
+        else if(c == 0) c = m / b; // m体积下可以装这种物品的最大数量
+
+        int k = 1;
+        while(k <= c) {
+            cnt++;
+            v[cnt] = k * a;
+            w[cnt] = k * b;
+            c -= k;
+            k *= 2;
+        }
+        if(c > 0) {
+            cnt++;
+            v[cnt] = c * a;
+            w[cnt] = c * b;
+        }
+    }
+    n = cnt;
+    for(int i = 1; i <= n; i++)
+        for(int j = m; j >= v[i]; j--) {
+            f[j] = max(f[j], f[j - v[i]] + w[i]);
+        }
+    cout << f[m] << endl;
+    return 0;
+}
+```
+
+### <a href="https://www.acwing.com/solution/content/79664/">分组背包</a>
+
+
+
+
+
+### 背包特殊问题(装满背包)
+
+恰好装满，表示空间V完全被占用。
+
+之前的题目是说，在不超过空间V的情况下，使价值最大化。
+
+ 
+
+现在考虑动态规划的初始值问题。
+
+在前一个问题中，`dp[i][v]` 初始化设置为0.
+
+因为在初始状态，背包中没有任何物品。不论背包的容量多大，里面的价值只是0.这个状态是合法的。因为背包并没有超出容量。
+
+现在，背包只有完全占满才是合法的值。那么在初始状态，`dp[i][0]`=0是合法的，因为容量为0，不放任何东西就是合法了。
+
+其他的都是非法值。应该设置为**负无穷**。
 

@@ -41,17 +41,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // 答案：40257
 // 直线一般方程：(y1-y2)x + (x2-x1)y + x1y2 - x2y1 = 0
 //#include <iostream>
@@ -109,32 +98,6 @@
 //	cout << ss.size();
 //	return 0;
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -237,26 +200,123 @@
 //	return 0;
 //}
 
-#include <iostream>
-#include <algorithm>
-using namespace std;
-const int N = 1010;
-int f[N][N]; // f[i][j]从 1-i 中选数总和为 j 的方案数
-int mod = 1e9 + 7;
-int main() {
-	int n;
-	cin >> n;
-	for (int i = 0; i <= n; i++)
-		f[i][0] = 1;
-	for (int i = 1; i <= n; i++)
-		for (int j = 0; j <= n; j++) {
-			if (j >= i)
-				f[i][j] = (f[i - 1][j] + f[i][j - i]) % mod;
-			else
-				f[i][j] = f[i - 1][j] % mod;
-		}
-	cout << f[n][n] << endl;
-	return 0;
-}
+//#include <iostream>
+//#include <algorithm>
+//using namespace std;
+//const int N = 1010;
+//int f[N][N]; // f[i][j]从 1-i 中选数总和为 j 的方案数
+//int mod = 1e9 + 7;
+//int main() {
+//	int n;
+//	cin >> n;
+//	for (int i = 0; i <= n; i++)
+//		f[i][0] = 1;
+//	for (int i = 1; i <= n; i++)
+//		for (int j = 0; j <= n; j++) {
+//			if (j >= i)
+//				f[i][j] = (f[i - 1][j] + f[i][j - i]) % mod;
+//			else
+//				f[i][j] = f[i - 1][j] % mod;
+//		}
+//	cout << f[n][n] << endl;
+//	return 0;
+//}
 
+// dp[i][j]设前i个物品是否可以称出重量j
+//#include <iostream>
+//#include <cmath>
+//using namespace std;
+//const int N = 110, M = 100010;
+//bool f[N][M];
+//int w[N];
+//int main() {
+//	int n, sum = 0;
+//	cin >> n;
+//	for (int i = 1; i <= n; i++) {
+//		scanf("%d", &w[i]);
+//		sum += w[i];
+//		f[i][0] = 1;
+//	}
+//	for (int i = 1; i <= n; i++) // 循环前i个砝码
+//		for (int j = 1; j <= sum; j++) { // 循环所有可能称出的质量
+//			f[i][j] = f[i - 1][j];
+//
+//			if (!f[i][j]) {
+//				if (w[i] == j)
+//					f[i][j] = true;
+//				if (f[i - 1][j + w[i]] || f[i - 1][abs(j - w[i])])
+//					f[i][j] = true;
+//
+//			}
+//
+//		}
+//	long long ans = 0;
+//	for (int i = 1; i <= sum; i++) {
+//		if (f[n][i])
+//			ans++;
+//	}
+//	cout << ans << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+// 左孩子右兄弟
+// dp[i]表示以i为根的子树转化成的二叉树的最大高度
+// dp[x] = max{dp[u]+size(x)} u 是x的儿子
+//#include <iostream>
+//#include <cstring>
+//#include <vector>
+//using namespace std;
+//const int N = 1e5 + 10;
+//vector<int> g[N];
+//
+//int dfs(int u) {
+//	int ret = 0;
+//	int psize = g[u].size();
+//
+//	for (int x : g[u]) { // 遍历u的孩子结点
+//		ret = max(ret, dfs(x) + psize);
+//	}
+//	return ret;
+//}
+//
+//int main() {
+//	int n;
+//	cin >> n;
+//	for (int i = 2; i <= n; i++) {
+//		int s;
+//		cin >> s;
+//		g[s].push_back(i);
+//	}
+//	cout << dfs(1) << endl;
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//typedef long long LL ;
+//
+//void getYue(LL n) {
+//	for (int i = 1; i <= n / i; i++) {
+//		if (n % i == 0) {
+//			if (n != i * i) {
+//				cout << i << " " << n / i << endl;
+//			} else
+//				cout << i << endl;
+//		}
+//	}
+//}
+//
+//int main() {
+//	LL n;
+//	while (cin >> n) {
+//		getYue(n);
+//	}
+//
+//	return 0;
+//}
 

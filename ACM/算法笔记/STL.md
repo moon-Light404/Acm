@@ -66,7 +66,7 @@ back //得到数组最后一个单元的引用
 max_size //得到vector最大可以是多大
 capacity //当前vector分配的大小(元素个数)
 size //当前使用数据的大小
-reserve //改变当前vector所分配空间的大小
+resi //改变当前vector所分配空间的大小
 clear //清空当前的vector
 empty //判断vector是否为空
     
@@ -615,3 +615,28 @@ bitset<4> foo (string("1001"));
 `lower_bound( begin,end,num,greater< type>())`：查找第一个小于或等于 num 的数字
 
 `upper_bound( begin,end,num,greater< type>())`：查找第一个小于 num 的数字
+
+
+
+
+
+### 堆
+
+c++优先队列
+
+```c++
+priority_queue<int> heap; // 大根堆
+
+priority_queue<int, vector<int>, greater<int>> heap; // 小根堆
+```
+
+操作
+
+```c++
+heap.top(); // 获得堆顶元素
+heap.push(1);
+heap.pop(); // 弹出堆顶元素
+heap.empty(); // 判空
+heap.size(); // d
+```
+
