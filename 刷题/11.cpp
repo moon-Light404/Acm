@@ -167,5 +167,69 @@
 
 
 
+/*
+测试数据 
+4 5 18
+3 6 14
+2 3 12
+3 8 11
+3 4 10
+6 7 9
+1 2 8
+5 6 7
+1 6 6
+3 7 6
+1 8 5
+0 5 4
+0 1 3
+2 8 2
+4 7 1
+*/
+
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+int n = 9, m = 15;
+int eCount = 0, p[10];
+struct Edges
+{
+	int a, b, w;
+}edges[15];
+
+bool cmp(Edges a, Edges b)
+{
+	return a.w < b.w;
+}
+
+int find(int x)
+{
+	if(p[x] != x)	return find(p[x]);
+	return x;
+} 
+int sum = 0; // 道路总长度 
+int main() 
+{
+	for(int i = 0; i < n; i++)	p[i] = i;
+	for(int i = 0; i < m; i++) 
+		scanf("%d%d%d", &edges[i].a, &edges[i].b, &edges[i].w);
+	sort(edges, edges + m, cmp);
+	printf("需要维修以下道路：");
+	for(int i = 0; i < m; i++) 
+	{
+		int a = edges[i].a, b = edges[i].b;
+		int fa = find(a), fb = find(b);
+		if(fa != fb)
+		{
+			p[fa] = fb;
+			eCount++;
+			printf("(%d  %d)  %d\n", edges[i].a, edges[i].b, edges[i].w);
+			sum += edges[i].w;
+			if(eCount == n - 1)	break;
+		}
+	}
+	printf("维修的总长度为 ：%d", sum);
+	return 0;
+}
 
 
